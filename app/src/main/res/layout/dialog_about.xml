@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/dialog_about.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#2C2C3E"
+    android:padding="25dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📱 ABOUT"
+        android:textSize="32sp"
+        android:textColor="#00FF64"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="App Name:"
+        android:textSize="16sp"
+        android:textColor="#AAAAAA"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DodgeEm - Dodge the Blocks"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developer:"
+        android:textSize="16sp"
+        android:textColor="#AAAAAA"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ahmad Asif"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textSize="16sp"
+        android:textColor="#AAAAAA"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avoid falling blocks as long as you can! Test your reflexes in this fast-paced arcade game."
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginBottom="25dp"/>
+
+    <Button
+        android:id="@+id/btnCloseAbout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="CLOSE"
+        android:textSize="18sp"
+        android:backgroundTint="#9B59B6"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>
