@@ -1,4 +1,4 @@
-// GameActivity.java - Main Game Screen
+// GameActivity.java - Main Game Screen with Diamond Player
 package com.newandromo.dev26615.app608772;
 
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -38,6 +38,7 @@ public class GameActivity extends AppCompatActivity {
         private float playerSpeed = 20;
         private boolean moveLeft = false;
         private boolean moveRight = false;
+        private Path diamondPath;
 
         private ArrayList<Block> blocks;
         private long startTime;
@@ -54,9 +55,11 @@ public class GameActivity extends AppCompatActivity {
             super(context);
             holder = getHolder();
             paint = new Paint();
+            paint.setAntiAlias(true);
             random = new Random();
             blocks = new ArrayList<>();
             prefs = context.getSharedPreferences("DodgeEmPrefs", Context.MODE_PRIVATE);
+            diamondPath = new Path();
             setFocusable(true);
         }
 
@@ -119,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
                 lastBlockTime = currentTime;
             }
 
-            // Update blocks
+            // Update blocks and check collisions with diamond shape
             for (int i = blocks.size() - 1; i >= 0; i--) {
                 Block block = blocks.get(i);
                 block.y += blockSpeed;
@@ -129,20 +132,35 @@ public class GameActivity extends AppCompatActivity {
                     continue;
                 }
 
-                // Collision detection
-                if (block.x < playerX + playerSize &&
-                        block.x + block.width > playerX &&
-                        block.y < playerY + playerSize &&
-                        block.y + block.height > playerY) {
+                // Diamond collision detection (checking against diamond bounds)
+                if (checkDiamondCollision(block)) {
                     gameOver = true;
                     saveScore();
-                    // Navigate to GameOverActivity immediately
                     Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
                     intent.putExtra("score", score);
                     startActivity(intent);
                     finish();
                 }
             }
+        }
+
+        private boolean checkDiamondCollision(Block block) {
+            // Diamond center point
+            float centerX = playerX + playerSize / 2;
+            float centerY = playerY + playerSize / 2;
+
+            // Check if block intersects with diamond shape
+            // Diamond vertices: top, right, bottom, left
+            float top = playerY;
+            float bottom = playerY + playerSize;
+            float left = playerX;
+            float right = playerX + playerSize;
+
+            // Simple bounding box collision for diamond
+            return block.x < right &&
+                    block.x + block.width > left &&
+                    block.y < bottom &&
+                    block.y + block.height > top;
         }
 
         private void saveScore() {
@@ -179,10 +197,8 @@ public class GameActivity extends AppCompatActivity {
                             block.y + block.height, paint);
                 }
 
-                // Draw player
-                paint.setColor(Color.rgb(0, 255, 100));
-                canvas.drawRect(playerX, playerY, playerX + playerSize,
-                        playerY + playerSize, paint);
+                // Draw player as DIAMOND shape
+                drawDiamond(canvas);
 
                 // Draw score
                 paint.setColor(Color.WHITE);
@@ -191,6 +207,35 @@ public class GameActivity extends AppCompatActivity {
 
                 holder.unlockCanvasAndPost(canvas);
             }
+        }
+
+        private void drawDiamond(Canvas canvas) {
+            // Create diamond/rhombus shape
+            diamondPath.reset();
+
+            float centerX = playerX + playerSize / 2;
+            float centerY = playerY + playerSize / 2;
+
+            // Diamond points: top, right, bottom, left
+            diamondPath.moveTo(centerX, playerY); // Top point
+            diamondPath.lineTo(playerX + playerSize, centerY); // Right point
+            diamondPath.lineTo(centerX, playerY + playerSize); // Bottom point
+            diamondPath.lineTo(playerX, centerY); // Left point
+            diamondPath.close();
+
+            // Fill diamond with gradient effect
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.rgb(0, 255, 100));
+            canvas.drawPath(diamondPath, paint);
+
+            // Add outline for better visibility
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(4);
+            paint.setColor(Color.rgb(0, 200, 80));
+            canvas.drawPath(diamondPath, paint);
+
+            // Reset to fill for other drawing
+            paint.setStyle(Paint.Style.FILL);
         }
 
         private void sleep() {
