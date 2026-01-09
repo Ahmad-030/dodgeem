@@ -11,15 +11,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DodgeEm">
+
+        <!-- Splash Screen - Launch Activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Get Started Screen -->
+        <activity
+            android:name=".GetStartedActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Game Screen -->
+        <activity
+            android:name=".GameActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Game Over Screen -->
+        <activity
+            android:name=".GameOverActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- High Score Screen -->
+        <activity
+            android:name=".HighScoreActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.newandromo.dev26615.app608772"
-    compileSdk = 36
+    compileSdk = 36  // Changed from 35 to 36
 
     defaultConfig {
         applicationId = "com.newandromo.dev26615.app608772"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 36  // Changed from 35 to 36
         versionCode = 1
         versionName = "1.0"
 

@@ -112,7 +112,8 @@ public class GameActivity extends AppCompatActivity {
             // Spawn blocks
             if (currentTime - lastBlockTime > blockSpawnDelay) {
                 float blockWidth = 60 + random.nextInt(100);
-                float blockX = random.nextInt((int)(screenWidth - blockWidth));
+                float maxX = screenWidth - blockWidth;
+                float blockX = maxX > 0 ? random.nextInt((int)maxX) : 0;
                 int colorType = random.nextInt(4);
                 blocks.add(new Block(blockX, -100, blockWidth, 60, colorType));
                 lastBlockTime = currentTime;
