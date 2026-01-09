@@ -136,6 +136,11 @@ public class GameActivity extends AppCompatActivity {
                         block.y + block.height > playerY) {
                     gameOver = true;
                     saveScore();
+                    // Navigate to GameOverActivity immediately
+                    Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
+                    intent.putExtra("score", score);
+                    startActivity(intent);
+                    finish();
                 }
             }
         }
@@ -184,23 +189,6 @@ public class GameActivity extends AppCompatActivity {
                 paint.setTextSize(50);
                 canvas.drawText("Score: " + score, 40, 70, paint);
 
-                // Game over overlay
-                if (gameOver) {
-                    paint.setColor(Color.argb(180, 0, 0, 0));
-                    canvas.drawRect(0, 0, screenWidth, screenHeight, paint);
-
-                    paint.setTextSize(100);
-                    paint.setTextAlign(Paint.Align.CENTER);
-                    paint.setColor(Color.RED);
-                    canvas.drawText("GAME OVER", screenWidth / 2, screenHeight / 2 - 100, paint);
-
-                    paint.setTextSize(50);
-                    paint.setColor(Color.WHITE);
-                    canvas.drawText("Your Score: " + score, screenWidth / 2, screenHeight / 2, paint);
-                    canvas.drawText("Tap to Continue", screenWidth / 2, screenHeight / 2 + 100, paint);
-                    paint.setTextAlign(Paint.Align.LEFT);
-                }
-
                 holder.unlockCanvasAndPost(canvas);
             }
         }
@@ -233,12 +221,6 @@ public class GameActivity extends AppCompatActivity {
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             if (gameOver) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
-                    finish();
-                }
                 return true;
             }
 

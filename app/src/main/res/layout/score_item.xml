@@ -5,16 +5,16 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="#2C2C3E"
-    android:padding="15dp"
-    android:layout_marginBottom="10dp"
-    android:elevation="4dp">
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="3dp">
 
     <TextView
         android:id="@+id/tvRank"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:text="#1"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textColor="#FFD700"
         android:textStyle="bold"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1234 seconds"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"/>
 
@@ -38,9 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jan 10, 2026"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="#AAAAAA"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="2dp"/>
 
     </LinearLayout>
 
